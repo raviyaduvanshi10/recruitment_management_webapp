@@ -1,0 +1,117 @@
+<mat-card>
+    <div id="userdetails" style="display: block; height: 75vh;">
+        <div>
+            <img [src]=user_image width="80px" height="80px">
+            <div style="float: right;">
+                <button type="button" mat-raised-button color="primary" (click)="userDoc()">
+                    User Document
+                    <mat-icon matSuffix>picture_as_pdf</mat-icon>
+                </button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="user">
+            <!-- <p>{{employeeUpdateForm | json}}</p> -->
+            <form novalidate #updateForm="ngForm" (ngSubmit)="onSubmit()">
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="30px" fxLayoutGap.lt-md="5px">
+
+                    <mat-form-field fxFlex>
+                        <mat-label>Employee Name</mat-label>
+                        <input matInput type="text" id="employeeName" [(ngModel)]="employeeUpdateForm.employeeName"
+                            placeholder="Employee Name" name="employeeName">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-label>Designation</mat-label>
+                        <mat-select id="designation" [(ngModel)]="employeeUpdateForm.designation" name="designation">
+                            <mat-option value="Manager">Manager</mat-option>
+                            <mat-option value="Team Lead">Team Lead</mat-option>
+                            <mat-option value="Recruiter">Recruiter</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-label>Date of Joining</mat-label>
+                        <input matInput type="text" id="doj" [(ngModel)]="employeeUpdateForm.doj" placeholder="DOJ"
+                            name="doj">
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="30px" fxLayoutGap.lt-md="5px">
+                    <mat-form-field fxFlex>
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput type="text" id="mobileNumber" [(ngModel)]="employeeUpdateForm.mobileNumber"
+                            placeholder="Mobile Number" name="mobileNumber">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-label>DOB</mat-label>
+                        <input matInput type="text" id="dob" [(ngModel)]="employeeUpdateForm.dob" placeholder="DOB"
+                            name="dob">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-label>Gender</mat-label>
+                        <input matInput type="text" id="gender" [(ngModel)]="employeeUpdateForm.gender"
+                            placeholder="Gender" name="gender">
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="30px" fxLayoutGap.lt-md="5px">
+                    <mat-form-field fxFlex="32">
+                        <mat-label>Official Email</mat-label>
+                        <input matInput type="text" id="officeEmailId" [(ngModel)]="employeeUpdateForm.officeEmailId"
+                            placeholder="Official Email" name="officeEmailId">
+                    </mat-form-field>
+
+
+                    <mat-form-field fxFlex="32">
+                        <mat-label>Personal Email</mat-label>
+                        <input matInput type="text" id="personalEmailId"
+                            [(ngModel)]="employeeUpdateForm.personalEmailId" placeholder="Personal Email"
+                            name="personalEmailId">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-label>Username</mat-label>
+                        <input matInput type="text" id="userName" [(ngModel)]="employeeUpdateForm.userName"
+                            placeholder="Username" name="userName">
+                    </mat-form-field>
+                </div>
+                <br>
+                <div style="text-align: end;">
+                    <button style="margin-right:1%;" mat-raised-button color="primary" type="button"
+                        (click)="return()">Back</button>
+                    <button mat-raised-button color="primary" type="submit">Update</button>
+                </div>
+
+            </form>
+
+        </div>
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+    </div>
+    <div id="pdffile" style="display: none;">
+        <div>
+            <div style="font-size: 25px;" fxFlex>
+                <label for=""> <b>User Document</b> </label>
+            </div>
+            <div style="text-align: end; margin: 5px;">
+                <button mat-raised-button color="primary" (click)="back()">
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    Back to User Detail
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div style="text-align: center;">
+            <iframe [src]=user_doc class="doc">
+            </iframe>
+        </div>
+    </div>
+
+</mat-card>

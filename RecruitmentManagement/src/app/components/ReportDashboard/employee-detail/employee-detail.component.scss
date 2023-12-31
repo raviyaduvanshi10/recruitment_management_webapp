@@ -1,0 +1,122 @@
+th {
+    border: 1px solid grey;
+    // border-collapse: collapse;
+    // padding: 5px;
+    color: blueviolet;
+    background-color: lightskyblue;
+    height: 5vh;
+    // width: 1400px;
+    font-size: 12px;
+    border-radius: 0px 0px 0px 0px;
+    text-align: center;
+}
+
+td {
+    border: 1px solid grey;
+    // border-collapse: collapse;
+    // padding: 5px;
+    height: 4vh;
+    // width: 1370px;
+    font-size: 12px;
+    // border-radius: 0px 0px 0px 0px;
+    text-align: center;
+    color: darkblue;
+}
+
+table {
+    // border-radius: 5px 5px 5px 5px;
+    border-collapse: collapse;
+    // padding: 5px;
+    // margin-left: 1px;
+    width: 200%;
+}
+
+table tr:nth-child(odd) {
+    background-color: lightcyan;
+}
+
+table tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+.table-responsive {
+    overflow-y: auto;
+    height: 350px;
+}
+
+.table-responsive thead th {
+    position: sticky;
+    top: 0;
+}
+
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+    top: -1.5em;
+}
+
+::ng-deep
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+    .mat-form-field-label {
+    transform: translateY(-1.1em) scale(0.75);
+    width: 133.33333%;
+}
+
+mat-raised-button {
+    width: 50px;
+}
+
+.doc {
+    width: 50%;
+    height: 100vh;
+}
+
+.animate {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    // border: 0.1rem solid black;
+    // margin: 2rem;
+    color: red;
+}
+
+span {
+    display: inline-block;
+    animation: 20s linear 0s infinite normal animate;
+}
+
+.advanced {
+    position: relative;
+    animation: 15s linear 0s infinite alternate advanced;
+}
+
+@keyframes animate {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes advanced {
+    0%,
+    25% {
+        transform: translateX(0%);
+        left: 0%;
+    }
+    75%,
+    100% {
+        transform: translateX(-100%);
+        left: 100%;
+    }
+}

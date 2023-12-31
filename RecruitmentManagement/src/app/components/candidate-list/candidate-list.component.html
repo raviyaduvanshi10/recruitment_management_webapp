@@ -1,0 +1,651 @@
+<mat-card>
+
+    <div id="candidatedetails" [hidden]="submitted">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+            <div style="font-size: 25px;" fxFlex>
+                <label for=""> <b>List of Uploaded Profile</b> </label>
+                <!-- <h3><b>List of Uploaded Profile</b></h3> -->
+            </div>
+
+            <div style="text-align: start; font-size: 14px;">
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker" placeholder={{searchText}} [(ngModel)]="searchText1">
+                    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <button mat-button matSuffix (click)="dateFormat()">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <hr>
+
+        <div id="performanceTable" style="display: block;" class="table-responsive1">
+            <div class="animate">
+                <span> 1. If you are looking for old data. Please select date and It will take month and year.
+                    Thankyou
+                    !</span>
+            </div>
+            <table class="table1">
+                <thead>
+                    <tr>
+                        <th scope="col" style="background-color: rebeccapurple; color: white;">T</th>
+                        <th scope="col" style="background-color: yellow; color: black;">SFP</th>
+                        <th scope="col" style="background-color: yellow; color: black;">SWC</th>
+                        <!-- <th scope="col" style="background-color: green; color: black;">SS</th>
+                        <th scope="col" style="background-color: red; color: black;">SR</th> -->
+                        <th scope="col" style="background-color: yellow; color: black;">D</th>
+                        <th scope="col" style="background-color: yellow; color: black;">P</th>
+                        <th scope="col" style="background-color: green; color: black;">L1-YTS</th>
+                        <th scope="col" style="background-color: green; color: black;">L1-IS</th>
+                        <th scope="col" style="background-color: green; color: black;">L1-IFP</th>
+                        <th scope="col" style="background-color: red; color: black;">L1-R</th>
+                        <th scope="col" style="background-color: green; color: black;">L1-S</th>
+                        <th scope="col" style="background-color: coral; color: black;">L2-IS</th>
+                        <th scope="col" style="background-color: coral; color: black;">L2-IFP</th>
+                        <th scope="col" style="background-color: red; color: black;">L2-R</th>
+                        <th scope="col" style="background-color: coral; color: black;">L2-S</th>
+                        <th scope="col" style="background-color: lightcoral; color: black;">L3-IS</th>
+                        <th scope="col" style="background-color: lightcoral; color: black;">L3-IFP</th>
+                        <th scope="col" style="background-color: red; color: black;">L3-R</th>
+                        <th scope="col" style="background-color: lightcoral; color: black;">L3-S</th>
+                        <th scope="col" style="background-color: red; color: black;">FR</th>
+                        <th scope="col" style="background-color: lightgreen; color: black;">FS</th>
+                        <th scope="col" style="background-color: lightgreen; color: black;">OP</th>
+                        <th scope="col" style="background-color: lightgreen; color: black;">YTJ</th>
+                        <th scope="col" style="background-color: lightgreen; color: black;">DO</th>
+                        <th scope="col" style="background-color: lightgreen; color: black;">J</th>
+
+                        <!-- <th scope="col" style="background-color: lightcoral; color: black;">Selected Candidates
+                        </th> -->
+
+                        <!-- <th scope="col" style="background-color: green; color: black;">P</th>
+                        <th scope="col" style="background-color: yellow; color: black;">FS</th>
+                        <th scope="col" style="background-color: red; color: black;">YTS</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="background-color: rebeccapurple; color: white;width: auto;height: auto;">
+                            <!-- <button mat-icon-button aria-label="Example icon button with a home icon"
+                                (click)="filterData('T')"  mat-mini-fab #button>
+                                <b>{{tCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('T')" color={{color1}} mat-mini-fab #button>
+                                <b>{{tCount}}</b>
+                            </button>
+                        </td>
+
+                        <td style="background-color: yellow; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('SFP')">
+                                <b>{{sfpCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('SFP')" color="white" mat-mini-fab #button>
+                                <b>{{sfpCount}}</b>
+                            </button>
+                        </td>
+
+                        <td style="background-color: yellow; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('SWC')">
+                                <b>{{swcCount}}</b>
+                            </button> -->
+
+                            <button (click)="filterData('SWC')" color="white" mat-mini-fab #button>
+                                <b>{{swcCount}}</b>
+                            </button>
+
+                        </td>
+
+                        <!-- <td style="background-color: green; color: black;width: auto;width: auto;height: auto;">
+                            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('SS')">
+                                <b>{{ssCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: red; color: black;width: auto;height: auto;">
+                            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="__filterRejectedData('SR')">
+                                <b>{{srCount}}</b>
+                            </button>
+                        </td> -->
+                        <td style="background-color: yellow; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('D')">
+                                <b>{{dCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('D')" color="white" mat-mini-fab #button>
+                                <b>{{dCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: yellow; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('P')">
+                                <b>{{pCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('P')" color="white" mat-mini-fab #button>
+                                <b>{{pCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: green; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('YTS')">
+                                <b>{{l1ytsCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('YTS')" color="white" mat-mini-fab #button>
+                                <b>{{l1ytsCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: green; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('IS')">
+                                <b>{{l1isCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('IS')" color="white" mat-mini-fab #button>
+                                <b>{{l1isCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: green; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('IFP')">
+                                <b>{{l1ifpCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('IFP')" color="white" mat-mini-fab #button>
+                                <b>{{l1ifpCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: red; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L1-R')">
+                                <b>{{l1rCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L1-R')" color="white" mat-mini-fab #button>
+                                <b>{{l1rCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: green; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L1-S')">
+                                <b>{{l1sCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L1-S')" color="white" mat-mini-fab #button>
+                                <b>{{l1sCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: coral; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L2-IS')">
+                                <b>{{l2isCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L2-IS')" color="white" mat-mini-fab #button>
+                                <b>{{l2isCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: coral; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L2-IFP')">
+                                <b>{{l2ifpCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L2-IFP')" color="white" mat-mini-fab #button>
+                                <b>{{l2ifpCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: red; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L2-R')">
+                                <b>{{l2rCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L2-R')" color="white" mat-mini-fab #button>
+                                <b>{{l2rCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: coral; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L2-S')">
+                                <b>{{l2sCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L2-S')" color="white" mat-mini-fab #button>
+                                <b>{{l2sCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightcoral; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L3-IS')">
+                                <b>{{l3isCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L3-IS')" color="white" mat-mini-fab #button>
+                                <b>{{l3isCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightcoral; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L3-IFP')">
+                                <b>{{l3ifpCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L3-IFP')" color="white" mat-mini-fab #button>
+                                <b>{{l3ifpCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: red; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L3-R')">
+                                <b>{{l3rCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L3-R')" color="white" mat-mini-fab #button>
+                                <b>{{l3rCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightcoral; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('L3-S')">
+                                <b>{{l3sCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('L3-S')" color="white" mat-mini-fab #button>
+                                <b>{{l3sCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: red; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="__filterRejectedData('SR')">
+                                <b>{{srCount}}</b>
+                            </button> -->
+                            <button (click)="__filterRejectedData('SR')" color="white" mat-mini-fab #button>
+                                <b>{{srCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightgreen; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('FS')">
+                                <b>{{fsCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('FS')" color="white" mat-mini-fab #button>
+                                <b>{{fsCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightgreen; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('OP')">
+                                <b>{{opCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('OP')" color="white" mat-mini-fab #button>
+                                <b>{{opCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightgreen; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="filterData('YTJ')">
+                                <b>{{ytjCount}}</b>
+                            </button> -->
+                            <button (click)="filterData('YTJ')" color="white" mat-mini-fab #button>
+                                <b>{{ytjCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightgreen; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="__filterDroppedData('DO')">
+                                <b>{{doCount}}</b>
+                            </button> -->
+                            <button (click)="__filterDroppedData('DO')" color="white" mat-mini-fab #button>
+                                <b>{{doCount}}</b>
+                            </button>
+                        </td>
+                        <td style="background-color: lightgreen; color: black;width: auto;height: auto;">
+                            <!-- <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                                (click)="__filterJoinedData('J')">
+                                <b>{{jCount}}</b>
+                            </button> -->
+                            <button (click)="__filterJoinedData('J')" color="white" mat-mini-fab #button>
+                                <b>{{jCount}}</b>
+                            </button>
+                        </td>
+                        <!-- <td><a href="/$" style="text-decoration: none;"><b>Name</b></a></td> -->
+                        <!-- <td style="background-color: green; color: black;width: auto;height: auto;">19</td>
+                        <td style="background-color: yellow; color: black;width: auto;height: auto;">10</td>
+                        <td style="background-color: red; color: black;width: auto;height: auto;">10</td> -->
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="table" class="table-responsive" [hidden]="approved">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Submisssion Date</th>
+                        <th scope="col">Role</th>
+                        <th scope="col"> Name</th>
+                        <th scope="col">Email Id </th>
+                        <th scope="col">Mobile </th>
+                        <th scope="col">CCTC </th>
+                        <th scope="col">ECTC </th>
+                        <th scope="col">NP </th>
+                        <th>Total Experiance</th>
+                        <th>Related Experiance</th>
+                        <th scope="col">Location </th>
+                        <th scope="col">Remarks </th>
+                        <th scope="col">Action </th>
+                    </tr>
+                </thead>
+                <!-- <tbody *ngFor="let candidate of candidates | async | filter:searchText; let i=index"> -->
+                <tbody *ngFor="let candidate of candidates; let i=index">
+                    <!-- <tr *ngIf=" candidate.status !== 20 && openingId == candidate.openingId"> -->
+                    <tr>
+                        <td>{{i+1}} </td>
+                        <td> {{candidate.dos | date:'longDate'}} </td>
+                        <td> {{candidate.role}} </td>
+                        <td> {{candidate.candidateName}} </td>
+                        <td> {{candidate.emailId}} </td>
+                        <td> {{candidate.mobileNumber}} </td>
+                        <td> {{candidate.cctc}} </td>
+                        <td>{{candidate.ectc}}</td>
+                        <td>{{candidate.np}}</td>
+                        <td>{{candidate.totalExperiance}}</td>
+                        <td>{{candidate.relatedExperiance}}</td>
+                        <td> {{candidate.preferredLocation}} </td>
+                        <td>{{candidate.recruiterRemarks}}</td>
+                        <td>
+                            <div *ngIf="sfp" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Profile </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        <span class="fa fa-eye fa-lg"></span>Profiles View</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        <span class="fa fa-ban fa-lg"></span> Screen Reject</a>
+                                    <a mat-button
+                                        (click)="sharedProfile(candidate.id, candidate.emailId, candidate.openingId, candidate.recruiterId)"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Share With Client</a>
+                                </div>
+                            </div>
+                            <div *ngIf="swc" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Profile </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        <span class="fa fa-ban fa-lg"></span> Screen Rejected</a>
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="actionType1(candidate.id, 'SWC', 'D')">
+                                        <span class="fa fa-ban fa-lg"></span> Duplicate </a>
+                                    <a mat-button (click)="actionType(candidate.id, 'SWC', 'SS', 'P', 'YTS')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Screen Selected</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="ifp" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Profile </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="actionType1(candidate.id, 'IFP', 'L1-R')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-ban fa-lg"></span> L1 Rejected</a>
+                                    <a mat-button (click)="actionType(candidate.id, 'IFP', 'L1-S')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> L1 Selected</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Final Rejected</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="l2ifp" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Profile </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="actionType1(candidate.id, 'L2-IFP', 'L2-R')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-ban fa-lg"></span> L2 Rejected</a>
+                                    <a mat-button (click)="actionType(candidate.id, 'L2-IFP', 'L2-S')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> L2 Selected</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Final Rejected</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="l3ifp" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Profile </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="actionType1(candidate.id, 'L3-IFP', 'L3-R')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-ban fa-lg"></span> L3 Rejected</a>
+                                    <a mat-button (click)="actionType(candidate.id, 'L3-IFP', 'L3-S')"
+                                        routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> L3 Selected</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Final Rejected</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="l1s" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Process for L2
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="confirmSlot(candidate.emailId, candidate.id, 'L1-S', 'L2-IS')">
+                                        <span class="fa fa-sign-in fa-lg"></span>Slot Confirmation</a>
+                                </div>
+                            </div>
+                            <div *ngIf="l2s" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Process for L3 </a>
+                                <div class="dropdown-content">
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="confirmSlot(candidate.emailId, candidate.id, 'L2-S', 'L3-IS')">
+                                        <span class="fa fa-sign-in fa-lg"></span>Slot Confirmation</a>
+                                </div>
+                            </div>
+                            <div *ngIf="l3s" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Profile </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active"> Final
+                                        Reject</a>
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="actionType1(candidate.id, 'L3-S', 'FS')">Final Select</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="yts" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        Profiles View</a>
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="confirmSlot(candidate.emailId, candidate.id, 'YTS', 'IS')">
+                                        <span class="fa fa-sign-in fa-lg"></span>Slot Confirmation</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="is" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">Processed for L1 </a>
+                                <div class="dropdown-content">
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="actionType1(candidate.id, 'IS', 'IFP')">
+                                        <span class="fa fa-check fa-lg"></span> Attended</a>
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> No Show</a>
+                                    <!-- <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> CBP</a>
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> CBC</a> -->
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Need to Reschedule</a>
+                                    <!-- <a mat-button routerLinkActive="active">Interviewer Feedback
+                                        Pending</a> -->
+                                </div>
+                            </div>
+                            <div *ngIf="l2is" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"><span class="fa fa-sign-in fa-lg"></span>
+                                    Processed for L2
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="actionType1(candidate.id, 'L2-IS', 'L2-IFP')">
+                                        <span class="fa fa-check fa-lg"></span> Attended</a>
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> No Show</a>
+                                    <!-- <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> CBP</a>
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> CBC</a> -->
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Need to Reschedule</a>
+                                </div>
+                            </div>
+                            <div *ngIf="l3is" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn"> Processed for L3 </a>
+                                <div class="dropdown-content">
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="actionType1(candidate.id, 'L3-IS', 'L3-IFP')">
+                                        <span class="fa fa-check fa-lg"></span> Attended</a>
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> No Show</a>
+                                    <a mat-button routerLinkActive="active">
+                                        <span class="fa fa-check fa-lg"></span> Need to Reschedule</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="fs" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        Profiles View</a>
+                                    <a mat-button routerLinkActive="active"
+                                        (click)="actionType1(candidate.id, 'FS', 'OP')">
+                                        <span class="fa fa-sign-in fa-lg"></span>Offer Pending</a>
+                                </div>
+                            </div>
+
+
+                            <div *ngIf="op" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        Profiles View</a>
+                                    <a mat-button (click)="actionType1(candidate.id, 'OP', 'YTJ')"
+                                        routerLinkActive="active"> Yet to Join</a>
+                                </div>
+                            </div>
+
+                            <div *ngIf="ytj" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        Profiles View</a>
+                                    <a mat-button (click)="dropoutProfile(candidate.id)" routerLinkActive="active">
+                                        Dropout</a>
+                                    <a mat-button (click)="joinProfile(candidate.id)" routerLinkActive="active">
+                                        Joined </a>
+                                </div>
+                            </div>
+                            <div *ngIf="j">
+                                <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                    <span class="fa fa-eye fa-lg"></span></a>
+
+                            </div>
+
+                            <div *ngIf="l1r" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)"
+                                        routerLinkActive="active">Preview</a>
+                                    <a mat-button (click)="actionType1(candidate.id, 'L1-R', 'SFP')"
+                                        routerLinkActive="active">
+                                        SFP</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        Final Reject</a>
+
+                                </div>
+                            </div>
+                            <div *ngIf="l2r" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        <span class="fa fa-eye fa-lg"></span>Preview</a>
+                                    <a mat-button (click)="actionType1(candidate.id, 'L2-R', 'SFP')"
+                                        routerLinkActive="active">
+                                        SFP</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        Final Reject</a>
+
+                                </div>
+                            </div>
+                            <div *ngIf="l3r" class="dropdown" id="recruiter">
+                                <a mat-button class="dropbtn">
+                                    Profile
+                                </a>
+                                <div class="dropdown-content">
+                                    <a mat-button (click)="resumeView(candidate.emailId)" routerLinkActive="active">
+                                        <span class="fa fa-eye fa-lg"></span>Preview</a>
+                                    <a mat-button (click)="actionType1(candidate.id, 'L3-R', 'SFP')"
+                                        routerLinkActive="active">
+                                        SFP</a>
+                                    <a mat-button (click)="rejectProfile(candidate.id)" routerLinkActive="active">
+                                        Final Reject</a>
+
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="isLoading"
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </div>
+
+        <div [hidden]="!approved">
+            <mat-card>
+                <h4> This profile has approved.</h4>
+            </mat-card>
+        </div>
+    </div>
+
+    <div id="pdffile" style="display: none;">
+        <div>
+            <div style="font-size: 25px;" fxFlex>
+                <label for=""> <b>Candidate Profile</b> </label>
+            </div>
+            <div style="text-align: end; margin: 5px;">
+                <button mat-raised-button color="primary" (click)="returnCandidate()">
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    Back to Candidate Detail
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div style="text-align: center;">
+            <iframe [src]=candidate_cv class="doc">
+            </iframe>
+        </div>
+    </div>
+
+    <div [hidden]="!submitted" style="min-height: 70vh;">
+        <mat-toolbar color="primary">
+            The profile sent to RejectedProfile Database !
+        </mat-toolbar>
+        <br>
+        <mat-toolbar color="primary">
+            Screen Rejected !
+        </mat-toolbar>
+        <br> <br>
+        <div style="text-align: center;"><button mat-raised-button color="primary" (click)="close()">Close
+                <mat-icon suffix>close</mat-icon>
+            </button></div>
+    </div>
+
+</mat-card>

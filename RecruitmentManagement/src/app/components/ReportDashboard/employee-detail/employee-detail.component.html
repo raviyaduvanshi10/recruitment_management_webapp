@@ -1,0 +1,113 @@
+<mat-card>
+    <div id="openingList">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+            <div style="font-size: 25px;" fxFlex>
+                <label for=""> <b>Upload Profile</b> </label>
+            </div>
+
+            <div style="text-align: start; font-size: 14px;">
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker" placeholder={{searchText}} [(ngModel)]="searchText1">
+                    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <button mat-button matSuffix (click)="dateFormat()">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <div class="animate">
+                <span> 1. If you are looking for old data. Please select date and It will take month and year.
+                    Thankyou
+                    !</span>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S.N</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col"> Employee Type </th>
+                        <th scope="col"> Contract Duration </th>
+                        <th scope="col"> Role </th>
+                        <th scope="col"> Opening Location </th>
+                        <th scope="col"> Comapny name </th>
+                        <th scope="col"> Client Name </th>
+                        <th scope="col"> Required Experiance </th>
+                        <th scope="col"> Budget Range </th>
+                        <th scope="col"> Required Notice Period </th>
+                        <th scope="col"> Job Description </th>
+                        <th scope="col"> Mandatory Skills </th>
+                        <th scope="col"> WFH </th>
+                        <th scope="col"> Questions</th>
+                        <th scope="col">Slots</th>
+                        <th>Upload Profile</th>
+                    </tr>
+                </thead>
+                <!-- <tbody *ngFor="let data of dataSource1  | filter:searchText;let i=index"> -->
+                <tbody *ngFor="let data of dataSource1;let i=index">
+                    <!-- <tr *ngIf="data.status == 10"> -->
+                    <tr>
+                        <td scope="row"> {{i+1}} </td>
+                        <td>{{data.date_time | date: "longDate"}}</td>
+                        <td>{{data.date_time | date: "mediumTime"}}</td>
+                        <td> {{data.employeeType}} </td>
+                        <td> {{data.contractDuration}} </td>
+                        <td> {{data.role}} </td>
+                        <td> {{data.openingLocation}} </td>
+                        <td> {{data.companyName}} </td>
+                        <td> {{data.clientName}} </td>
+                        <td> {{data.requiredExperiance}} </td>
+                        <td> {{data.budgetRange}} </td>
+                        <td> {{data.noticePeriod}} </td>
+                        <td> {{data.jobDescription}} </td>
+                        <td> {{data.mandatorySkills}} </td>
+                        <td> {{data.wfh}} </td>
+                        <td> {{data.questions}} </td>
+                        <td> {{data.slot}} </td>
+                        <td>
+                            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                                (click)="displayDoc(data.role)">
+                                <mat-icon>remove_red_eye_outline</mat-icon>
+                            </button>
+                            <a mat-button
+                                [routerLink]="['/default/uploadresume', data.openingId,'work', data.recruiterId, 'allocation', data.workAllocationId]">
+                                <span class="fa fa-sign-in fa-lg"></span>
+                            </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="isLoading"
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </div> <br>
+        <button mat-raised-button color="primary" (click)="back()">Previous Page</button>
+    </div>
+
+
+    <div id="openingSample" style="display: none;">
+        <div>
+            <div style="font-size: 25px;" fxFlex>
+                <label for=""> <b>Opening Sample</b> </label>
+            </div>
+            <div style="text-align: end; margin: 5px;">
+                <button mat-raised-button color="primary" (click)="return()">
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    Back to Requirement
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div style="text-align: center;">
+            <iframe [src]=resumeDoc class="doc">
+            </iframe>
+        </div>
+    </div>
+
+</mat-card>

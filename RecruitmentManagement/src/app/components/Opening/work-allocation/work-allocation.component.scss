@@ -1,0 +1,113 @@
+th {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    color: blueviolet;
+    background-color: lightskyblue;
+    height: 5vh;
+    width: 1200px;
+    font-size: 12px;
+    border-radius: 0px 0px 0px 0px;
+    text-align: center;
+}
+
+td {
+    border-collapse: collapse;
+    width: 1200px;
+    font-size: 12px;
+    border-radius: 0px 0px 0px 0px;
+    text-align: center;
+    color: darkblue;
+}
+
+table {
+    text-align: center;
+    width: 100%;
+}
+
+table tr:nth-child(odd) {
+    background-color: lightcyan;
+}
+
+table tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+.table-responsive {
+    overflow-y: auto;
+    height: 350px;
+}
+
+.table-responsive thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+mat-progress-spinner {
+    position: absolute;
+    top: 200px;
+}
+
+circle {
+    stroke-width: 11%;
+}
+
+mat-raised-button {
+    width: 50px;
+}
+
+.doc {
+    width: 50%;
+    height: 100vh;
+}
+
+.myClickableThingy {
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.myClickableThingy1 {
+    cursor: pointer;
+    margin-left: 5%;
+}
+
+.animate {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    // border: 0.1rem solid black;
+    // margin: 2rem;
+    color: red;
+}
+
+span {
+    display: inline-block;
+    animation: 20s linear 0s infinite normal animate;
+}
+
+.advanced {
+    position: relative;
+    animation: 15s linear 0s infinite alternate advanced;
+}
+
+@keyframes animate {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes advanced {
+    0%,
+    25% {
+        transform: translateX(0%);
+        left: 0%;
+    }
+    75%,
+    100% {
+        transform: translateX(-100%);
+        left: 100%;
+    }
+}

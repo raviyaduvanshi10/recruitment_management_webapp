@@ -1,0 +1,136 @@
+<mat-card>
+    <div class="employee" *ngFor="let emp of dataSource">
+        <div style="float: left;">
+            <p *ngIf="emp.mobileNumber"><label for=""><b>Name</b></label> : {{emp.employee }} </p>
+            <p *ngIf="emp.userName"><label for=""><b>Username</b></label> : {{emp.userName }} </p>
+            <p><label for=""><b>Position</b></label> : {{emp.loginType}}</p>
+            <!-- <p><label for=""><b>Mobile</b></label> : {{emp.mobileNumber}}</p> -->
+        </div>
+        <div style="text-align: end;">
+            <img [src]="user_image" alt="" width="80px" height="80px">
+        </div>
+    </div>
+    <hr>
+    <div id="taskform" style="display: none;">
+        <br>
+        <button mat-button (click)="cancel()">Return</button>
+        <hr>
+        <div [hidden]="submitted" style="width:100%;" class="table-responsive">
+            <!-- <p> {{tasks | json}} </p> -->
+            <form novalidate #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+                <div>
+                    <p>
+                        <mat-form-field fxFlex="30">
+                            <mat-label>Date & Time</mat-label>
+                            <input matInput type="datetime-local" id="doj" [(ngModel)]="tasks.date"
+                                placeholder="mm-dd-yyyy" name="dob" #dob="ngModel" required>
+                            <mat-error *ngIf="dob.errors?.required"> Date is required. </mat-error>
+                        </mat-form-field>
+                    </p>
+
+                    <p>
+                        <mat-form-field fxFlex="30">
+                            <textarea matInput type="text" id="task" [(ngModel)]="tasks.task" placeholder="Task"
+                                (keyup)="autoGrowTextZone($event)" required name="task" #task="ngModel">
+                            </textarea>
+                            <mat-error *ngIf="task.errors?.required"> Task is required. </mat-error>
+                        </mat-form-field>
+                    </p>
+                    <div style="width: 30%;">
+                        <label for="">Others</label>
+                        <hr>
+                        <input type="file" name="doc" (change)="onDocSelect($event)" accept=".pdf" required>
+                    </div>
+
+                </div>
+                <div>
+                    <br>
+                    <button mat-button type="submit" [disabled]="clientForm.form.invalid">Schedule</button>
+                </div>
+            </form>
+        </div>
+
+        <div [hidden]="!submitted">
+            <h4>Successfully scheduled!</h4>
+        </div>
+    </div>
+
+
+    <div class="table-responsive" id="taskTable">
+        <br>
+        <button mat-button (click)="schedule()">Schedule Task</button>
+        <hr>
+        <div id="showTable">
+            <div class="animate">
+                <span> 1. Please complete your pending task as soon as possible. Thankyou !</span>
+            </div>
+            <hr>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col"> Date</th>
+                        <!-- <th scope="col"> Time</th> -->
+                        <th scope="col"> Task</th>
+                        <th scope="col"> Status </th>
+                        <th>View Doc</th>
+                        <th scope="col"> Action </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let tjson of taskJson ; let i=index">
+                        <td> {{i+1}} </td>
+                        <td> {{tjson.date | date: "longDate"}} </td>
+                        <!-- <td> {{tjson.datetime | date: "mediumTime"}} </td> -->
+                        <td> {{tjson.task}} </td>
+                        <td> {{tjson.status}} </td>
+                        <td>
+                            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                                (click)="scheduleDocs(tjson.date)">
+                                <mat-icon>remove_red_eye_outline</mat-icon>
+                            </button>
+                        </td>
+                        <td>
+                            <mat-form-field style="font-size: 10px;">
+                                <mat-select (selectionChange)="updateStatus($event.value, tjson.id)">
+                                    <mat-option *ngFor="let action of actions" [value]="action">
+                                        <p>{{action}}</p>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div *ngIf="isLoading"
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </div>
+        <div id="pdffile" style="display: none;">
+            <div>
+                <div style="font-size: 25px;" fxFlex>
+                    <label for=""> <b>Document</b> </label>
+                </div>
+                <div style="text-align: end; margin: 5px;">
+                    <button mat-raised-button color="primary" (click)="back()">
+                        <mat-icon matPrefix>arrow_back</mat-icon>
+                        Back to Schedule Table
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div style="text-align: center;">
+                <iframe [src]=schedule_doc class="doc">
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <!-- <div >
+        <span class="advanced">A really long text to scroll through</span>
+    </div> -->
+</mat-card>

@@ -1,0 +1,26 @@
+<mat-card>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+        <div fxFlex *ngFor="let data of dataSource">
+            <label for=""><b>Client Name</b> </label> : {{data.clientName}} <br>
+            <label for=""><b>Company Name</b> </label> : {{data.companyName}} <br>
+            <label for=""><b>Client URL</b> </label> : <a href={{data.clientUrl}}> {{data.clientUrl}} </a> <br>
+            <label for=""><b>Client Location</b> </label> : {{data.location}} <br>
+            <label for=""><b>Client Remarks</b> </label> : {{data.remarks}}
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="back()">
+                <mat-icon matPrefix>arrow_back</mat-icon>
+                Back to Client List
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h3>Client Presentation</h3>
+        <hr>
+        <div style="text-align: center;">
+            <iframe [src]=clientDoc allow="clientDoc" class="doc">
+            </iframe>
+        </div>
+    </div>
+</mat-card>

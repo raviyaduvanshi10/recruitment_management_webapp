@@ -1,0 +1,237 @@
+<mat-card>
+    <div style="margin-right: 4%; margin-left: 4%;">
+        <h2> Upload Profile </h2>
+        <hr>
+        <form [formGroup]="uploadForm" (ngSubmit)="onExtrctingData()">
+            <div>
+                <h4>Upload Resume</h4>
+                <input type="file" name="profile" (change)="onFileSelect($event)" accept=".docx,.doc,.pdf" />
+            </div>
+        </form>
+        <hr>
+
+        <h4> Candidate Details </h4>
+        <hr>
+        <!-- <div [hidden]="submitted" style="width:100%;" class="table-responsive"> -->
+        <div style="width:100%;" class="table-responsive">
+
+            <!-- <p> {{resumeData | json}} </p> -->
+            <form fxLayout="column" novalidate #resumeDataForm="ngForm" (ngSubmit)="onSubmit(resumeDataForm)">
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" id="candidateName" [(ngModel)]="resumeData.candidateName"
+                            placeholder="Candidate Name" required name="candidateName" #candidateName="ngModel">
+                        <mat-error *ngIf="candidateName.errors?.required"> Candidate Name is required. </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" id="mobileNumber" [(ngModel)]="resumeData.mobileNumber"
+                            placeholder="Mobile Number" required name="mobileNumber" #mobileNumber="ngModel">
+                        <mat-error *ngIf="mobileNumber.errors?.required"> Mobile number is required. </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" id="emailId" [(ngModel)]="resumeData.emailId" placeholder="Email Id"
+                            required name="emailId" #emailId="ngModel">
+                        <mat-error *ngIf="emailId.errors?.required"> Email is required. </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" id="skills" [(ngModel)]="resumeData.skills" placeholder="Skills Set"
+                            name="skills" #skills="ngModel">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <input matInput type="text" id="currentCompanyName" [(ngModel)]="resumeData.currentCompanyName"
+                            placeholder="Current Company" name="currentCompanyName" #currentCompanyName="ngModel"
+                            required>
+                        <mat-error *ngIf="currentCompanyName.errors?.required"> Current Company Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+
+                    <mat-form-field fxFlex>
+                        <mat-icon style="font-size: 100%;" matSuffix>YEARS</mat-icon>
+                        <input matInput type="text" pattern="^\d{1,2}(?:\.\d{1,2})?$" id="totalExperiance"
+                            name="totalExperiance" [(ngModel)]="resumeData.totalExperiance"
+                            placeholder="Total Experience" required name="totalExperiance" #totalExperiance="ngModel">
+                        <mat-error *ngIf="totalExperiance.errors?.pattern"> Please match the requested format 10.5 or
+                            4.11.
+                        </mat-error>
+                        <mat-error *ngIf="totalExperiance.errors?.required"> Total experiance is required. </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-icon style="font-size: 100%;" matSuffix>YEARS</mat-icon>
+                        <input matInput type="text" max="" pattern="^\d{1,2}(?:\.\d{1,2})?$" id="relatedExperiance"
+                            required name="relatedExperiance" [(ngModel)]="resumeData.relatedExperiance"
+                            placeholder="Relevant Experience" required name="relatedExperiance"
+                            #relatedExperiance="ngModel">
+                        <mat-error *ngIf="relatedExperiance.errors?.pattern"> Please match the requested format 10.5 or
+                            4.11.</mat-error>
+                        <mat-error *ngIf="relatedExperiance.errors?.required"> Related experiance is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+                    <mat-form-field fxFlex="18">
+                        <mat-select matNativeControl (selectionChange)="npCheck($event.value)" id="np" required
+                            name="np" [(ngModel)]="resumeData.np" placeholder="Notice Period" name="np" #np="ngModel"
+                            required>
+                            <mat-option *ngFor="let np of noticePeriod" [value]="np">
+                                {{np}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="np.errors?.required">Notce period is required.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex id="snp" style="display: none; margin-left: 15%;">
+                        <mat-select matNativeControl (selectionChange)="snpCheck($event.value)" name="snp"
+                            [(ngModel)]="resumeData.snp" placeholder="Serving Notice Period" name="snp" #snp="ngModel">
+                            <mat-option value="yes">Yes</mat-option>
+                            <mat-option value="no">No</mat-option>
+                        </mat-select>
+                        <!-- <mat-error *ngIf="snp.errors?.required"> Serving notice Period is required. </mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex id="lwd" style="display: none;  margin-left: 15%;">
+                        <mat-label>Last Working Day</mat-label>
+                        <!-- <input matInput type="date" placeholder="LWD" [(ngModel)]="resumeData.lwd" name="lwd"
+                            #lwd="ngModel" required> -->
+                        <input matInput type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" class="datepicker"
+                            placeholder="dd/mm/yyyy" [(ngModel)]="resumeData.lwd" name="lwd" #lwd="ngModel" />
+                        <mat-error *ngIf="lwd.errors?.pattern"> Please match the requested format
+                            (dd/mm/yyyy)</mat-error>
+                        <!-- <mat-error *ngIf="lwd.errors?.required"> LWD is required. </mat-error> -->
+                    </mat-form-field>
+
+                </div>
+
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+                    <mat-form-field fxFlex>
+                        <mat-icon style="font-size: 100%;" matSuffix>LPA</mat-icon>
+                        <input matInput type="text" pattern="^\d{1,2}(?:\.\d{1,2})?$" id="cctc"
+                            [(ngModel)]="resumeData.cctc" placeholder="Current CTC" required name="cctc"
+                            #cctc="ngModel">
+                        <mat-error *ngIf="cctc.errors?.required"> Current CTC Name is required. </mat-error>
+                        <mat-error *ngIf="cctc.errors?.pattern"> Please match the requested format XX.XX. </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-icon style="font-size: 100%;" matSuffix>LPA</mat-icon>
+                        <input matInput type="text" pattern="^\d{1,2}(?:\.\d{1,2})?$" id="ectc"
+                            [(ngModel)]="resumeData.ectc" placeholder="Expected CTC" required name="ectc"
+                            #ectc="ngModel">
+                        <mat-error *ngIf="ectc.errors?.pattern"> Please match the requested format XX.XX. </mat-error>
+                        <mat-error *ngIf="ectc.errors?.required"> Expected CTC Name is required. </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+                    <mat-form-field fxFlex="18">
+                        <mat-label> Holding Any Offer</mat-label>
+                        <mat-select (selectionChange)="offer($event.value)" [(ngModel)]="resumeData.holdingOffer"
+                            name="holdingOffer" #holdingOffer="ngModel" required>
+                            <mat-option *ngFor="let bool of boolians" [value]="bool">
+                                {{ bool }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="holdingOffer.errors?.required"> Holding offer is required. </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex id="offeredCompanyName" style="display: none; margin-left: 8%;">
+                        <input matInput type="text" [(ngModel)]="resumeData.offeredCompanyName"
+                            placeholder="Offered Company Name" name="offeredCompanyName" #offeredCompanyName="ngModel">
+                        <!-- <mat-error *ngIf="offeredCompanyName.errors?.required">Offered company name is required.
+                        </mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex id="octc" style="display: none; margin-left: 8%;">
+                        <mat-icon style="font-size: 100%;" matSuffix>LPA</mat-icon>
+                        <input matInput type="text" pattern="^\d{1,2}(?:\.\d{1,2})?$" placeholder="Offered CTC"
+                            name="octc" [(ngModel)]="resumeData.octc" #octc="ngModel">
+                        <!-- <mat-error *ngIf="octc.errors?.required">Offered CTC is required.</mat-error> -->
+                        <mat-error *ngIf="octc.errors?.pattern"> Please match the requested format XX.XX. </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex id="ejd" style="display: none; margin-left: 8%;">
+                        <mat-label>Expected Joining date </mat-label>
+                        <input matInput type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" class="datepicker"
+                            [(ngModel)]="resumeData.ejd" placeholder="dd/mm/yyyy" name="ejd" #ejd="ngModel" value="" />
+                        <!-- <input matInput type="date" [(ngModel)]="resumeData.ejd" placeholder="Expected Joining date"
+                            name="ejd" #ejd="ngModel" required> -->
+                        <!-- <mat-error *ngIf="ejd.errors?.required">Expected joining date is required.</mat-error> -->
+                        <mat-error *ngIf="ejd.errors?.pattern"> Please match the requested format
+                            (dd/mm/yyyy)</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="120px"
+                    fxLayoutGap.lt-md="0px">
+                    <mat-form-field fxFlex>
+                        <mat-label>Candidate Current Location</mat-label>
+                        <mat-select [(ngModel)]="resumeData.currentLocation" name="currentLocation"
+                            #currentLocation="ngModel" required>
+                            <mat-option *ngFor="let loc of location" [value]="loc.location">
+                                {{loc.location}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="currentLocation.errors?.required"> Candidate location is required.
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex>
+                        <mat-label> Candidate Preferred Location</mat-label>
+                        <mat-select [(ngModel)]="resumeData.preferredLocation" name="preferredLocation"
+                            #preferredLocation="ngModel" required>
+                            <mat-option *ngFor="let loc of location" [value]="loc.location">
+                                {{loc.location}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="preferredLocation.errors?.required"> Candidate location is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field fxFlex="45">
+                        <input matInput type="text" id="remarks" [(ngModel)]="resumeData.remarks"
+                            placeholder="Recruiter Remarks" name="remarks" #remarks="ngModel">
+                    </mat-form-field>
+                </div>
+
+                <div style="text-align: end;">
+                    <hr>
+                    <button type="button" style="margin-right: 1%;" mat-button
+                        class="background-primary text-floral-white" (click)="cancel()">Cancel</button>
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="!resumeDataForm.valid">Create</button>
+                </div>
+            </form>
+            <div *ngIf="isLoading"
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </div>
+
+        <!-- <div [hidden]="!submitted">
+            <h4>Successfully submitted!</h4>
+        </div>
+        <br> -->
+
+    </div>
+
+</mat-card>
